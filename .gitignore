@@ -2,6 +2,7 @@
 *.zip
 *.csv
 __pycache__/
+data
 # IDE-specific configs
 .idea
 .idea/*
