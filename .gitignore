@@ -1,0 +1,7 @@
+# My own added ignore files
+*.zip
+*.csv
+__pycache__/
+# IDE-specific configs
+.idea
+.idea/*
