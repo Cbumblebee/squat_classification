@@ -19,7 +19,7 @@ class CustomSquatDataset(Dataset):
         self.label_values = labels.values
 
     def __len__(self):
-        return len(self.X)
+        return len(self.feature_values)
 
     def __getitem__(self, idx):
         # PyTorch wants float32 for features and long for classification labels

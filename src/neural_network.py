@@ -4,9 +4,8 @@ from torch import nn
 device = torch.accelerator.current_accelerator().type if torch.accelerator.is_available() else "cpu"
 print(f"Using {device} device")
 
-
-# as we have 12 inputs (left_knee_angle, right_knee_angle, ...) and 4 label-classes (0,1,3,4),
-# we should have input 12 and output 4
+# as we have 12 inputs (left_knee_angle, right_knee_angle, ...) and 6 label-classes (0,1,2,3,4,5)
+# we should have input 12 and output 6
 class NeuralNetwork(nn.Module):
     def __init__(self):
         super().__init__()
@@ -16,7 +15,7 @@ class NeuralNetwork(nn.Module):
             nn.ReLU(), # this is essentially max(0, x) - the weight dies if it is smaller than zero
             nn.Linear(32, 16),
             nn.ReLU(),
-            nn.Linear(16, 4),
+            nn.Linear(16, 6),
         )
 
     # TODO: find out what this does
@@ -24,5 +23,3 @@ class NeuralNetwork(nn.Module):
         x = self.flatten(x)
         logits = self.linear_relu_stack(x)
         return logits
-
-model = NeuralNetwork()

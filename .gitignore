@@ -2,6 +2,7 @@
 *.zip
 *.csv
 __pycache__/
+*.pth
 data
 # IDE-specific configs
 .idea

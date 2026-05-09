@@ -1,14 +1,6 @@
 import torch
-from torch import nn
-from neural_network import model
-from fetch_data import train_loader, test_loader
 
-learning_rate = 1e-3
-batch_size = 32
-epochs = 50
-best_accuracy = 0.0 # in the iteration phase, saving the best accuracy to minimize overfitting.
-
-def train_loop(dataloader, train_model, train_loss_fn, train_optimizer):
+def train_loop(dataloader, train_model, train_loss_fn, train_optimizer, batch_size):
     size = len(dataloader.dataset)
     # Set the model to training mode - important for batch normalization and dropout layers
     # Unnecessary in this situation but added for best practices
@@ -47,24 +39,4 @@ def test_loop(dataloader, test_model, test_loss_fn):
     test_loss /= num_batches
     correct /= size
     print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
-    return correct
-
-loss_fn = nn.CrossEntropyLoss()
-optimizerSGD = torch.optim.SGD(model.parameters(), lr=learning_rate) #TODO: explain why ADAM
-optimizerADAM = torch.optim.Adam(model.parameters(), lr=learning_rate) #TODO: explain why ADAM
-
-for t in range(epochs):
-    print(f"Epoch {t + 1}\n-------------------------------")
-    train_loop(train_loader, model, loss_fn, optimizerADAM)
-    current_acc = test_loop(test_loader, model, loss_fn)
-    if current_acc > best_accuracy:
-        best_accuracy = current_acc
-        # save the model
-        torch.save(model.state_dict(), f"model_adam_lr1e-3.pth")
-        print(f"--> New accuracy record: {100 * best_accuracy:.1f}% achieved in epoch {t+1}\n")
-print("Done!")
-
-
-# load the model - later
-# model.load_state_dict(torch.load(f"name.pth"))
-# model.eval() ?
+    return correct, test_loss

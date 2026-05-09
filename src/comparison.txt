@@ -1,0 +1,12 @@
+09/05/2026 10:12:25Adam, lr=3:
+name=model_adam_lr0.001.pth; best accuracy=0.9232795868900833; best epoch=45; loss=0.229075645808419; elapsed time=491.5146624429908
+
+SGD, lr=3:
+name=model_sgd_lr0.001.pth; best accuracy=0.5933185794077352; best epoch=49; loss=1.0341388508928344; elapsed time=384.5199173709989
+
+Adam, lr=2:
+name=model_adam_lr0.01.pth; best accuracy=0.9384550532195174; best epoch=39; loss=0.18509672025864574; elapsed time=493.5762204950006
+
+SGD, lr=2:
+name=model_sgd_lr0.01.pth; best accuracy=0.8836547581410054; best epoch=50; loss=0.3374660130000676; elapsed time=280.7969895450078
+
