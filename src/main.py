@@ -81,7 +81,8 @@ if __name__ == "__main__":
     model_s_lr2, model_s_lr2_name, model_s_lr2_acc, model_s_lr2_epoch, model_s_lr2_loss, model_s_lr2_time = run_experiment(optimizer_type="SGD", learning_rate=1e-2)
 
     with open("comparison.txt", "a") as f:
-        f.write(f"{datetime.now(tz=timezone.utc).strftime("%d/%m/%Y %H:%M:%S")}")
+        f.write("\n\n")
+        f.write(f"new estimation: {datetime.now(tz=timezone.utc).strftime("%d/%m/%Y %H:%M:%S")}\n")
         f.write("Adam, lr=3:\n")
         f.write(f"name={model_a_lr3_name}; best accuracy={model_a_lr3_acc}; best epoch={model_a_lr3_epoch}; loss={model_a_lr3_loss}; elapsed time={model_a_lr3_time}\n\n")
         f.write("SGD, lr=3:\n")
