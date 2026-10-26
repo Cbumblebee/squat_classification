@@ -4,6 +4,7 @@ import pandas as pd
 import torch
 from torch.utils.data import random_split
 
+
 class CustomSquatDataset(Dataset):
     def __init__(self, csv_data_file):
         df = pd.read_csv(csv_data_file)
@@ -27,11 +28,12 @@ class CustomSquatDataset(Dataset):
         features = torch.tensor(self.feature_values[idx], dtype=torch.float32)
         label = torch.tensor(self.label_values[idx], dtype=torch.long)
         return features, label
+#if __name__ == "__main__":
 
 dataset = CustomSquatDataset("../data/squat_dataset/squat_features_augmented.csv")
 # since I have only one dataset of this format, I need to split it into training and testing dataset:
 training_len = int(len(dataset) * 0.8) # 80% of the dataset is used for training
 testing_len = len(dataset) - training_len #20% is used for testing
-train_data, test_data = random_split(dataset, [training_len, testing_len])
+train_data, test_data = random_split(dataset, [training_len, testing_len], generator=torch.Generator().manual_seed(42))
 train_loader = DataLoader(train_data, batch_size=32, shuffle=True)
 test_loader = DataLoader(test_data, batch_size=32, shuffle=False)

@@ -1,4 +1,3 @@
-import torch
 from torch import nn
 
 # If someone had an accelerator (e.g. Nvidia GPU), then this would have been helpful.

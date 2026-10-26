@@ -1,0 +1,3 @@
+estimation: 26/10/2026 07:16:41
+name=model_adam_lr0.01.pth; best accuracy=0.9429866160817789; best epoch=40; loss=0.16826125473938006; elapsed time=490.95635645400034
+

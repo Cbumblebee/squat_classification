@@ -6,6 +6,8 @@ from fetch_data import train_loader, test_loader
 from datetime import datetime, timezone
 import time
 
+
+# run it from inside /src, bc of relative paths
 loss_fn = nn.CrossEntropyLoss()
 
 # Initialize model and optimizer new because otherwise the models would run with old, already learned, parameters.
@@ -32,7 +34,7 @@ def run_experiment(optimizer_type="ADAM", learning_rate=1e-3, epochs=50, batch_s
             best_epoch = e+1
             best_loss = current_loss
             # save the model
-            torch.save(model.state_dict(), model_name)
+            torch.save(model.state_dict(), f"../models/{model_name}")
             print(f"--> New accuracy record: {100 * best_accuracy:.1f}% achieved in epoch {e + 1}\n")
 
     elapsed_time = time.perf_counter() - start
@@ -43,6 +45,7 @@ def run_experiment(optimizer_type="ADAM", learning_rate=1e-3, epochs=50, batch_s
 # model.load_state_dict(torch.load(f"name.pth"))
 # model.eval()
 # The exact names are in the comparison.txt file.
+""" have commented that out, because I know that Adam l2=1e-2 is the best
 if __name__ == "__main__":
     model_a_lr3, model_a_lr3_name, model_a_lr3_acc, model_a_lr3_epoch, model_a_lr3_loss, model_a_lr3_time = run_experiment()
     model_s_lr3, model_s_lr3_name, model_s_lr3_acc, model_s_lr3_epoch, model_s_lr3_loss, model_s_lr3_time = run_experiment(optimizer_type="SGD")
@@ -60,6 +63,13 @@ if __name__ == "__main__":
         f.write(f"name={model_a_lr2_name}; best accuracy={model_a_lr2_acc}; best epoch={model_a_lr2_epoch}; loss={model_a_lr2_loss}; elapsed time={model_a_lr2_time}\n\n")
         f.write("SGD, lr=2:\n")
         f.write(f"name={model_s_lr2_name}; best accuracy={model_s_lr2_acc}; best epoch={model_s_lr2_epoch}; loss={model_s_lr2_loss}; elapsed time={model_s_lr2_time}\n\n")
+"""
+if __name__ == "__main__":
+    torch.manual_seed(42)
+    model_a_lr2, model_a_lr2_name, model_a_lr2_acc, model_a_lr2_epoch, model_a_lr2_loss, model_a_lr2_time = run_experiment(learning_rate=1e-2)
+    with open("new_run.txt", "a") as f:
+        f.write(f"estimation: {datetime.now(tz=timezone.utc).strftime("%d/%m/%Y %H:%M:%S")}\n")
+        f.write(f"name={model_a_lr2_name}; best accuracy={model_a_lr2_acc}; best epoch={model_a_lr2_epoch}; loss={model_a_lr2_loss}; elapsed time={model_a_lr2_time}\n\n")
 
 """
 model_adam_lr1e output:
